@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Icon from './Icons'
 
 const THEME_KEY = 'portfolio-theme'
 const isTheme = value => value === 'dark' || value === 'light'
@@ -6,10 +7,9 @@ const isTheme = value => value === 'dark' || value === 'light'
 const LINKS = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#testimonials', label: 'Testimonials' },
   { href: '#skills', label: 'Skills' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#services', label: 'Services' },
   { href: '#blog', label: 'Blog' },
   { href: '#contact', label: 'Contact' },
 ]
@@ -107,7 +107,7 @@ export default function Navbar() {
             aria-pressed={theme === 'light'}
             title={`Switch to ${nextTheme} mode`}
           >
-            <span>{nextTheme}</span>
+            <Icon name={theme === 'dark' ? 'sun' : 'moon'} />
           </button>
           <button
             className={`hamburger${open ? ' open' : ''}`}

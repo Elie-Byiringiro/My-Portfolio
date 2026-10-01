@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 
 export default function CountUp({ end, suffix = '', duration = 1600 }) {
-  const [value, setValue] = useState(0)
+  const isNumeric = Number.isFinite(Number(end))
+  const [value, setValue] = useState(() => (isNumeric ? 0 : end))
   const ref = useRef(null)
   const started = useRef(false)
 
   useEffect(() => {
+    if (!isNumeric) return
+
     const el = ref.current
     if (!el) return
 
@@ -33,11 +36,11 @@ export default function CountUp({ end, suffix = '', duration = 1600 }) {
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [end, duration])
+  }, [end, duration, isNumeric])
 
   return (
     <span ref={ref}>
-      {value}
+      {isNumeric ? value : end}
       {suffix}
     </span>
   )

@@ -3,13 +3,13 @@ export const fallbackProfile = {
   name: 'Byiringiro Elie',
   alias: 'M4STER',
   status: 'Available for new opportunities',
-  roles: ['Full-Stack Developer', 'Cybersecurity Analyst', 'API Architect'],
+  roles: ['Full-Stack Developer', 'Cybersecurity Analyst', 'API Architect', 'Platform Hosting'],
   location: 'Kigali, Rwanda',
   started_coding: '2022 — and leveling up daily',
   focus: 'React + Node.js',
   email: 'byiringiroelie468@gmail.com',
   whatsapp: '0783547443',
-  instagram: 'elie__001',
+  instagram: 'elie___001',
   github: 'elie',
   portfolio: 'elie.dev',
 }
@@ -31,16 +31,14 @@ export const fallbackTestimonials = [
     id: 1,
     quote:
       'The e-commerce platform transformed our checkout flow. Authentication, cart and payments all run reliably under real traffic. The work is solid and dependable.',
-    name: 'Ntirenganya Janvier',
-    role: 'Head of Product, TechSphere',
+    name: 'IMANIRUMVA PACIFIQUE',
     rating: 5,
   },
   {
     id: 2,
     quote:
       'The store design and checkout flow brought our brand to life. The attention to detail is unmatched.',
-    name: 'Uwimana Yassin',
-    role: 'Lead Designer, CreativeFlow',
+    name: 'MUKESHIMANA KEVEN',
     rating: 5,
   },
   {
@@ -102,8 +100,29 @@ export const fallbackProjects = [
   {
     id: 1,
     name: 'E-commerce',
-    description: 'Authentication, product management, cart & secure payments.',
-    tags: ['React', 'Node.js', 'MongoDB'],
+    description:
+      'Authentication, product management, cart & secure payments — REST API behind the storefront, deployed and hosted in production.',
+    tags: ['React', 'Node.js', 'REST API', 'MongoDB'],
+    image_url: '/projects/ecommerce.jpg',
+    whatsapp: '703756189701217',
+  },
+  {
+    id: 2,
+    name: 'Expert Dentrix API Integration Service',
+    description:
+      'Expert API integration for Dentrix — connecting external endpoints to the platform with authenticated requests, clear contracts, validation and error handling.',
+    tags: ['API Integration', 'Dentrix', 'REST API', 'Node.js'],
+    image_url: '/projects/dentrix-api.jpg',
+    whatsapp: '',
+  },
+  {
+    id: 3,
+    name: 'Managed Cloud & Hosting',
+    description:
+      'Managed cloud solutions and platform hosting: domain, DNS, SSL certificate, containerised build and CI/CD releases with automated backups and uptime monitoring.',
+    tags: ['Hosting', 'Docker', 'CI/CD', 'SSL'],
+    image_url: '/projects/hosting-deployment.jpg',
+    whatsapp: '',
   },
 ]
 

@@ -1,80 +1,48 @@
 import { useState } from 'react'
 import CountUp from './CountUp'
 import Reveal from './Reveal'
+import Icon from './Icons'
+import { usePortfolioData } from '../lib/usePortfolioData'
+import { fallbackProfile } from '../lib/fallbackData'
 
 const ROLES = [
-  ['Full-Stack', 'Developer'],
-  ['Cybersecurity', 'Analyst'],
-  ['API', 'Architect'],
+  ['Full-Stack Developer'],
+  ['Cybersecurity'],
+  ['API'],
 ]
 
-const WORD_ICONS = {
-  'Full-Stack': (
-    <>
-      <path d="m8 9-3 3 3 3" />
-      <path d="m16 9 3 3-3 3" />
-      <path d="m14 5-4 14" />
-    </>
-  ),
-  Developer: (
-    <>
-      <rect x="3" y="4" width="18" height="16" rx="2" />
-      <path d="m7 9 3 3-3 3" />
-      <path d="M12 15h5" />
-    </>
-  ),
-  Cybersecurity: (
-    <>
-      <path d="M12 3 5 6v5c0 4.6 2.9 8.2 7 10 4.1-1.8 7-5.4 7-10V6l-7-3Z" />
-      <path d="m9 12 2 2 4-4" />
-    </>
-  ),
-  Analyst: (
-    <>
-      <path d="M4 19V9" />
-      <path d="M10 19V5" />
-      <path d="M16 19v-7" />
-      <path d="M3 19h18" />
-    </>
-  ),
-  API: (
-    <>
-      <circle cx="5" cy="12" r="2" />
-      <circle cx="19" cy="6" r="2" />
-      <circle cx="19" cy="18" r="2" />
-      <path d="m7 11 10-4M7 13l10 4" />
-    </>
-  ),
-  Architect: (
-    <>
-      <path d="M4 21V8l8-5 8 5v13" />
-      <path d="M8 21v-6h8v6" />
-      <path d="M8 10h.01M12 10h.01M16 10h.01" />
-    </>
-  ),
+const ROLE_ICONS = {
+  'Full-Stack Developer': 'code',
+  Cybersecurity: 'shield',
+  API: 'api',
 }
 
 const PROFILE_STATS = [
-  { id: 'experience', value: 3, suffix: '+', label: 'Years Exp.' },
-  { id: 'projects', value: 6, suffix: '+', label: 'Projects' },
-  { id: 'pagespeed', value: 95, suffix: '+', label: 'PageSpeed' },
+  { id: 'experience', value: 2, label: 'Years Exp.' },
+  { id: 'projects', value: 6, label: 'Projects' },
+  { id: 'pagespeed', value: 95, label: 'PageSpeed' },
+  { id: 'kchats', value: 238, label: 'K-Chart' },
 ]
+
+const GITHUB_URL = 'https://github.com/elie'
+
+const ROLE_TOKENS = ROLES.map(role => {
+  const phrase = role.join(' ')
+  return { word: phrase, key: phrase }
+})
 
 function RoleList() {
   return (
     <div className="role-list" aria-label="Professional roles">
-      {ROLES.map(role => (
-        <span className="role-item" key={role.join('-')}>
-          {role.map(word => (
-            <span className="role-word" key={`${role.join('-')}-${word}`}>
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                {WORD_ICONS[word]}
-              </svg>
-              <span className="role-word-label">{word}</span>
-            </span>
-          ))}
-        </span>
-      ))}
+      <span className="role-line">
+        {ROLE_TOKENS.map((token, index) => (
+          <span className="role-word" key={token.key}>
+            <Icon name={ROLE_ICONS[token.word]} className="role-word-icon" />
+            <span className="role-word-typed">{token.word}</span>
+            {index < ROLE_TOKENS.length - 1 ? ', ' : null}
+          </span>
+        ))}
+      </span>
     </div>
   )
 }
@@ -83,6 +51,8 @@ export default function Hero() {
   const name = 'Byiringiro Elie'
   const initials = name.split(/\s+/).map(part => part[0]).join('').slice(0, 2).toUpperCase()
   const [photoOk, setPhotoOk] = useState(true)
+  const { data: profile } = usePortfolioData('profile', fallbackProfile)
+  const githubUrl = profile?.github ? `https://github.com/${profile.github}` : GITHUB_URL
 
   return (
     <section className="hero" id="home">
@@ -98,7 +68,8 @@ export default function Hero() {
           </div>
           <RoleList />
           <p className="hero-description">
-            Building functional, production-ready systems — secure APIs, reliable dashboards, authentication flows, and data-driven applications that solve real-world problems.
+            I build and host production platforms — secure APIs, authenticated dashboards, reliable databases
+            and deployments that stay online. Need an API built, a platform hosted, or both? Let&rsquo;s talk.
           </p>
           <div className="hero-meta">
             <span>Kigali, Rwanda</span>
@@ -111,6 +82,19 @@ export default function Hero() {
             <a href="#contact" className="btn btn-ghost">
               <span className="btn-caret">→</span> Contact Me
             </a>
+            <a className="btn btn-ghost" href={githubUrl} target="_blank" rel="noreferrer">
+              <span className="btn-caret">
+                <Icon name="github" />
+              </span>
+              GitHub
+            </a>
+          </div>
+
+          <div className="hero-wordmark" aria-hidden="true">
+            <span className="logo-bracket">[</span>
+            <span>M4STER</span>
+            <span className="logo-bracket">]</span>
+            <span className="logo-cursor">_</span>
           </div>
         </div>
 
@@ -131,16 +115,16 @@ export default function Hero() {
             </div>
           </Reveal>
 
-          <Reveal className="hero-side-extra">
-            <div className="profile-stats">
-              {PROFILE_STATS.map(stat => (
-                <div className="profile-stat" key={stat.id}>
-                  <strong><CountUp end={stat.value} suffix={stat.suffix} /></strong>
-                  <span>{stat.label}</span>
-                </div>
-              ))}
-            </div>
+          <Reveal className="profile-stats">
+            {PROFILE_STATS.map(stat => (
+              <div className={`profile-stat${stat.tone ? ` profile-stat-${stat.tone}` : ''}`} key={stat.id}>
+                <strong><CountUp end={stat.value} suffix={stat.suffix} /></strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
+          </Reveal>
 
+          <Reveal className="hero-side-extra">
             <button
               className="profile-chat"
               type="button"

@@ -5,10 +5,20 @@ import { fallbackProfile } from '../lib/fallbackData'
 const capabilities = [
   'Production-ready systems',
   'Secure API development',
+  'REST & GraphQL APIs',
+  'Platform hosting',
+  'Server & database deployment',
+  'Domains, SSL & uptime monitoring',
   'Database architecture',
   'Penetration testing',
   'Real-time applications',
   'CI/CD pipelines',
+]
+
+const workPreview = [
+  { id: 1, name: 'E-commerce', image: '/projects/ecommerce.jpg' },
+  { id: 2, name: 'Expert Dentrix API', image: '/projects/dentrix-api.jpg' },
+  { id: 3, name: 'Managed Cloud', image: '/projects/hosting-deployment.jpg' },
 ]
 
 export default function About() {
@@ -22,7 +32,7 @@ export default function About() {
           <span className="about-kicker">// whoami</span>
           <h2>About Me</h2>
           <h3>My Featured Work</h3>
-          <p>Full-stack developer &amp; cybersecurity analyst building real-world systems.</p>
+          <p>Full-stack developer, API engineer &amp; platform host building real-world systems.</p>
         </header>
       </Reveal>
 
@@ -35,6 +45,11 @@ export default function About() {
               Including APIs, dashboards, authentication flows, and real data-driven applications. I don't just
               design interfaces; I build the logic behind them, connect databases, secure user access, and make
               sure applications actually run reliably in the real world.
+            </p>
+            <p>
+              I also host the platforms I build. That means the API, the server, the domain, SSL and the deployment
+              pipeline are handled end to end — and monitored after launch, so clients get a live URL that keeps
+              serving instead of a project that only works on a laptop.
             </p>
             <p>
               With a background in cybersecurity, I bring a security-first mindset to every project — from
@@ -63,6 +78,20 @@ export default function About() {
           </aside>
         </Reveal>
       </div>
+
+      <Reveal>
+        <div className="work-strip">
+          <span className="work-strip-label">Selected work</span>
+          <div className="work-strip-grid">
+            {workPreview.map(item => (
+              <a key={item.id} className="work-tile" href="#projects">
+                <img src={item.image} alt={item.name} loading="lazy" decoding="async" />
+                <span>{item.name}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </Reveal>
     </section>
   )
 }

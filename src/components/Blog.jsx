@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import Reveal from './Reveal'
 import SectionHead from './SectionHead'
+import TechIcon from './TechIcons'
+import { techIconTint } from '../lib/techIcons'
 import { usePortfolioData } from '../lib/usePortfolioData'
 import { fallbackPosts } from '../lib/fallbackData'
 
@@ -102,7 +104,7 @@ export default function Blog() {
       <Reveal>
         <div className="blog-intro">
           <p>Technical writeups, CTF solutions, and dev insights from building and securing real products.</p>
-          <span className="blog-note-count">Development · Security · Process</span>
+          <span className="blog-note-count">Development Â· Security Â· Process</span>
         </div>
       </Reveal>
 
@@ -112,7 +114,7 @@ export default function Blog() {
           id={`post-${activeSlug}`}
           aria-labelledby={`post-title-${activeSlug}`}
         >
-          <a className="post-back" href="#blog" onClick={closeArticle}>← Back to all articles</a>
+          <a className="post-back" href="#blog" onClick={closeArticle}>â† Back to all articles</a>
 
           {activePost ? (
             <>
@@ -134,9 +136,20 @@ export default function Blog() {
 
               <footer className="post-article-footer">
                 <div className="post-tags">
-                  {(Array.isArray(activePost.tags) ? activePost.tags : []).map(tag => <span key={tag}>{tag}</span>)}
+                  {(Array.isArray(activePost.tags) ? activePost.tags : []).map(tag => (
+                    <span key={tag}>
+                      <span
+                        className="tech-icon tech-icon-tag"
+                        style={techIconTint(tag) ? { '--tech-tint': techIconTint(tag) } : undefined}
+                        aria-hidden="true"
+                      >
+                        <TechIcon label={tag} />
+                      </span>
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <a href="#contact">Discuss this topic →</a>
+                <a href="#contact">Discuss this topic â†’</a>
               </footer>
             </>
           ) : (
@@ -193,7 +206,18 @@ export default function Blog() {
                 </div>
                 <div className="post-card-footer">
                   <div className="post-tags">
-                    {tags.map(tag => <span key={tag}>{tag}</span>)}
+                    {tags.map(tag => (
+                      <span key={tag}>
+                        <span
+                          className="tech-icon tech-icon-tag"
+                          style={techIconTint(tag) ? { '--tech-tint': techIconTint(tag) } : undefined}
+                          aria-hidden="true"
+                        >
+                          <TechIcon label={tag} />
+                        </span>
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                   <a
                     className="post-read"
@@ -201,7 +225,7 @@ export default function Blog() {
                     onClick={event => openArticle(event, post.slug)}
                     aria-label={`Read ${post.title}`}
                   >
-                    Read article <span aria-hidden="true">→</span>
+                    Read article <span aria-hidden="true">â†’</span>
                   </a>
                 </div>
               </article>

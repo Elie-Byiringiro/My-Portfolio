@@ -37,7 +37,7 @@ export default function Testimonials() {
                 <span className="testimonial-avatar" aria-hidden="true">{item.name.charAt(0)}</span>
                 <span>
                   <strong>{item.name}</strong>
-                  <small>{item.role}</small>
+                  {item.role ? <small>{item.role}</small> : null}
                 </span>
               </figcaption>
             </figure>

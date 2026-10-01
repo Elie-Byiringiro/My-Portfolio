@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Icon from './Icons'
 
 export default function BackToTop() {
   const [show, setShow] = useState(false)
@@ -17,7 +18,7 @@ export default function BackToTop() {
       aria-label="Back to top"
       tabIndex={show ? 0 : -1}
     >
-      <span className="btt-arrow">↑</span>
+      <Icon name="arrowUp" className="btt-arrow" />
       <span className="btt-label">top</span>
     </button>
   )

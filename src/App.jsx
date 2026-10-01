@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
+import Services from './components/Services'
 import Experience from './components/Experience'
 import Testimonials from './components/Testimonials'
 import Skills from './components/Skills'
@@ -19,10 +20,11 @@ export default function App() {
       <Navbar />
       <Hero />
       <About />
+      <Skills />
       <Projects />
+      <Services />
       <Experience />
       <Testimonials />
-      <Skills />
       <Blog />
       <Contact />
       <Footer />
